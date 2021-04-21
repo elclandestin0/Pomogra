@@ -18,23 +18,23 @@ contract Pomogra {
         PaperType paperType;
     }
 
-    function chain() public view returns(Paper[] memory){
-        return _chain;
-    }
-
-    function owners() public view returns(address[] memory) {
-        return _owners;
-    }
-
-    function ownerExists(address owner_) public view returns (bool) {
-        return _ownerExists[owner_];
-    } 
-
     function addPaper(string memory message_, PaperType paperType_) public {
         _chain.push(Paper(message_, msg.sender, paperType_));
         if (_ownerExists[msg.sender] == false) {
             _ownerExists[msg.sender] = true;
             _owners.push(msg.sender);
         }
+    }
+
+    function chain() public view returns (Paper[] memory) {
+        return _chain;
+    }
+
+    function owners() public view returns (address[] memory) {
+        return _owners;
+    }
+
+    function ownerExists(address owner_) public view returns (bool) {
+        return _ownerExists[owner_];
     }
 }
