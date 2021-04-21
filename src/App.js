@@ -4,19 +4,19 @@ import React, { useEffect, useState } from "react";
 // aframe imports
 import "aframe";
 import { Entity, Scene } from "aframe-react";
+
 // eth imports
 // import web3 from "./ethereum/web3";
 import pomogra from "./ethereum/pomogra";
 
 // pomogra aframe components
+import Ring from "./components/aframe/Ring";
 require("./components/aframe/show-message");
 
 const App = () => {
   // chain state
   const [chain, setChain] = useState([]);
 
-  // show message state
-  const [show, setShow] = useState(false);
   useEffect(() => {
     const getContract = async () => {
       const chain = await pomogra.methods.chain().call();
@@ -25,50 +25,19 @@ const App = () => {
     getContract();
   }, []);
 
-  function showMessage() {
-    setShow(true);
-  }
-
-  function removeMessage() {
-    setShow(false);
-  }
-
   const returnChain = chain.map((paper, index) => {
     const message = paper.message;
     const owner = paper.owner;
     const paperType = paper.paperType;
 
-    // if the index is even, rotate x by 90 degrees
-
-    let position = `${index / 5}, 1, 0`;
-    let rotation;
-    index % 2 === 0 ? (rotation = "0 0 0") : (rotation = "-90 0 0");
-
-    const animationOptions = `startEvents: mouseleave; property: rotation; dur: 1000; from: 0 0 0; to: ${rotation}; dir: normal; easing: linear; loop: false;`;
-    const showMessageOptions = `show: ${show}`;
     return (
-      <Entity
-        class="clickable"
+      <Ring
+        message={message}
+        paperType={paperType}
+        owner={owner}
+        index={index}
         key={index}
-        position={position}
-        rotation={rotation}
-        geometry="primitive: torus; radius: 0.125; radiusTubular: 0.010"
-        animation="startEvents: mouseenter; property: rotation; dur: 1000; from: 0 0 0; to: 0 360 0; dir: normal; easing: linear; loop: true;"
-        animation__back={animationOptions}
-        events={{
-          mouseenter: showMessage.bind(this),
-          mouseleave: removeMessage.bind(this),
-        }}
-        // show-message={showMessageOptions}
-      >
-        {show && (
-          <Entity
-            position="0 .225 0"
-            text={{ value: message }}
-            geometry="primitive: plane; width: 1.030; height: 0.100;"
-          />
-        )}
-      </Entity>
+      ></Ring>
     );
   });
   return (
