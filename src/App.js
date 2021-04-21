@@ -19,6 +19,11 @@ const App = () => {
     };
     getContract();
   }, []);
+
+  const handleClick = () => {
+    console.log("clicked");
+  };
+
   const returnChain = chain.map((paper, index) => {
     const message = paper.message;
     const owner = paper.owner;
@@ -29,54 +34,34 @@ const App = () => {
     let rotation;
     index % 2 === 0 ? (rotation = "-90 0 0") : (rotation = "0 0 0");
     return (
-      <Entity
+      <a-entity
+        events={{
+          click: handleClick(),
+        }}sa
         key={index}
         position={position}
         rotation={rotation}
         geometry="primitive: torus; radius: 0.125; radiusTubular: 0.010"
+        animation="begin: click; end: mouseleave; sproperty: rotation; dur: 1000; from: 0 0 0;    to: 0 360 0; dir: normal;    easing: linear; loop: true;"
       >
-        <a-animation
-          begin="click"
-          attribute="position"
-          from="0 0 0"
-          to="0 0 -10"
-          dur="2000"
-          fill="both"
-        ></a-animation>
-        <Entity
+        {/* <Entity
           position="0 .225 0"
           text={{ value: message }}
           geometry="primitive: plane; width: 1.030; height: 0.100;"
-        />
-      </Entity>
+        /> */}
+      </a-entity>
     );
   });
   return (
     <Scene>
       <a-camera>
         <a-cursor
-          cursor="fuse: true; fuseTimeout: 500"
+          animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.2 0.2 0.2; to: 1 1 1"
+          // animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 1500; from: 1 1 1; to: 0.2 0.2 0.2"
+          // animation__mouseleave="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 1 1 1"
+          cursor="fuse: true; fuseTimeout: 1"
           material="color: #ffffff"
-        >
-          <a-animation
-            begin="click"
-            easing="ease-in"
-            attribute="scale"
-            fill="backwards"
-            from="0.2 0.2 0.2"
-            to="1 1 1"
-            dur="0"
-          ></a-animation>
-          <a-animation
-            begin="fusing"
-            easing="ease-in"
-            attribute="scale"
-            fill="forwards"
-            from="1 1 1"
-            to="0.1 0.1 0.1"
-            dur="0"
-          ></a-animation>
-        </a-cursor>
+        ></a-cursor>
       </a-camera>
       <Entity
         geometry="primitive: plane; width: 10; height: 10"
