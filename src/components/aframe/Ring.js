@@ -6,7 +6,6 @@ import "aframe";
 import { Entity } from "aframe-react";
 
 const Ring = ({ message, owner, paperType, index }) => {
-  console.log(index);
   const [show, setShow] = useState(false);
 
   // show state setters
@@ -19,7 +18,6 @@ const Ring = ({ message, owner, paperType, index }) => {
   let rotation;
   index % 2 === 0 ? (rotation = "0 180 0") : (rotation = "-90 180 0");
 
-  const y = 0.225;
   let positionMessage = `${index / 5}, 1.225, 0`;
 
   const animationOptions = `startEvents: mouseleave; property: rotation; dur: 1000; from: 0 0 0; to: ${rotation}; dir: normal; easing: linear; loop: false;`;

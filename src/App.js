@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 
 // aframe imports
 import "aframe";
+import "aframe-gui";
 import { Entity, Scene } from "aframe-react";
 
 // eth imports
@@ -42,11 +43,18 @@ const App = () => {
   });
   return (
     <Scene>
+      <a-gui-input
+        width="2.5"
+        height="0.75"
+        // font-family="assets/fonts/PermanentMarker-Regular.ttf"
+        font-size="0.2"
+        value="123"
+        margin="0 0 0.05 0"
+        position="0 1 0"
+      ></a-gui-input>
       <a-camera>
         <a-cursor
           animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.2 0.2 0.2; to: 1 1 1"
-          // animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 1500; from: 1 1 1; to: 0.2 0.2 0.2"
-          // animation__mouseleave="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 1 1 1"
           cursor="fuse: true; fuseTimeout: 1"
           material="color: #ffffff"
         ></a-cursor>
