@@ -30,3 +30,16 @@ AFRAME.registerComponent("show-message", {
     });
   },
 });
+
+AFRAME.registerComponent("go-to-form", {
+  schema: {
+    link: { type: "string", default: "/" },
+  },
+  init: function () {
+    var data = this.data;
+    var el = this.el;
+    el.addEventListener("mouseenter", () => {
+      console.log(data.link);
+    });
+  },
+});
