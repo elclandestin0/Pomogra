@@ -10,7 +10,6 @@ const App = () => {
   return (
     <Switch>
       <Route exact path="/" component={Home}/>
-      <Route exact path="/form" component={Form}/>
     </Switch>
   );
 };

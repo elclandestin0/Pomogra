@@ -26,11 +26,6 @@ const Home = (props) => {
     getContract();
   }, []);
 
-  function goToForm() {
-    console.log("/form");
-    props.history.push("/form");
-  }
-
   const returnChain = chain.map((paper, index) => {
     const message = paper.message;
     const owner = paper.owner;
@@ -48,8 +43,14 @@ const Home = (props) => {
   });
   return (
     <a-scene>
-      <a-entity id="leftHand" hand-tracking-controls="hand: left;"></a-entity>
-      <a-entity id="rightHand" hand-tracking-controls="hand: right;"></a-entity>
+      <a-entity
+        id="leftHand"
+        hand-controls="hand: left; handModelStyle: lowPoly; color: #ffcccc"
+      ></a-entity>
+      <a-entity
+        id="rightHand"
+        hand-controls="hand: right; handModelStyle: lowPoly; color: #ffcccc"
+      ></a-entity>
       <a-camera>
         <a-cursor
           animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.2 0.2 0.2; to: 1 1 1"
@@ -68,9 +69,6 @@ const Home = (props) => {
         material="color: red"
         position="0 0 -5"
         scale="1 1 1"
-        events={{
-          mouseenter: goToForm.bind(this),
-        }}
       ></Entity>
       {returnChain}
     </a-scene>
