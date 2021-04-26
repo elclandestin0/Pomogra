@@ -13,10 +13,12 @@ import Ring from "./Ring";
 import Buttons from "./Buttons";
 
 require("./aframe/aframe-components");
+require("aframe-super-keyboard");
 
 const Home = (props) => {
   // chain state
   const [chain, setChain] = useState([]);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     const getContract = async () => {
@@ -26,7 +28,10 @@ const Home = (props) => {
     getContract();
   }, []);
 
+  const keyboardOptions = `hand: #mouseCursor, #left, #right; value: ${message}`;
+
   const returnChain = chain.map((paper, index) => {
+    // attributes from our smart contract
     const message = paper.message;
     const owner = paper.owner;
     const paperType = paper.paperType;
@@ -63,20 +68,34 @@ const Home = (props) => {
       {/* VR Hands */}
       <a-entity
         id="leftHand"
-        hand-controls="hand: left; handModelStyle: lowPoly; color: #ffcccc"
+        hand-controls="hand: left; handModelStyle: highPoly; color: #ffcccc"
       ></a-entity>
       <a-entity
         id="rightHand"
-        hand-controls="hand: right; handModelStyle: lowPoly; color: #ffcccc"
+        hand-controls="hand: right; handModelStyle: highPoly; color: #ffcccc"
       ></a-entity>
+      <Entity
+        id="keyboard"
+        super-keyboard={keyboardOptions}
+        position="0 1.3 -0.3"
+        rotation="-30 0 0"
+        events={{
+          superkeyboardchange: (e) => {
+            setMessage(e.detail.value);
+            console.log(message);
+          },
+        }}
+      ></Entity>
       <Buttons></Buttons>
       {/* Camera */}
       <a-camera>
-        <a-cursor
+        {/* <a-cursor
+          id="mouseCursor"
           animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.2 0.2 0.2; to: 1 1 1"
           cursor="fuse: true; fuseTimeout: 1"
           material="color: #ffffff"
-        ></a-cursor>
+        ></a-cursor> */}
+        <a-entity id="mouseCursor" cursor="rayOrigin: mouse"></a-entity>
       </a-camera>
       {/* Plane */}
       <a-entity
