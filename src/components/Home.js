@@ -7,13 +7,13 @@ import { Entity } from "aframe-react";
 
 // eth imports
 import pomogra from "../ethereum/pomogra";
+import web3 from "../ethereum/web3";
 
 // pomogra aframe components
 import Ring from "./Ring";
-import Buttons from "./Buttons";
+import UserControls from "./UserControls";
 
 require("./aframe/aframe-components");
-require("aframe-super-keyboard");
 
 const Home = (props) => {
   // chain state
@@ -74,27 +74,17 @@ const Home = (props) => {
         id="rightHand"
         hand-controls="hand: right; handModelStyle: highPoly; color: #ffcccc"
       ></a-entity>
-      <Entity
-        id="keyboard"
-        super-keyboard={keyboardOptions}
-        position="0 1.3 -0.3"
-        rotation="-30 0 0"
-        events={{
-          superkeyboardchange: (e) => {
-            setMessage(e.detail.value);
-            console.log(message);
-          },
-        }}
-      ></Entity>
-      <Buttons></Buttons>
+      {/* Keyboard */}
+      {/* Buttons */}
+      <UserControls></UserControls>
       {/* Camera */}
       <a-camera>
-        {/* <a-cursor
+        <a-cursor
           id="mouseCursor"
           animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.2 0.2 0.2; to: 1 1 1"
           cursor="fuse: true; fuseTimeout: 1"
           material="color: #ffffff"
-        ></a-cursor> */}
+        ></a-cursor>
         <a-entity id="mouseCursor" cursor="rayOrigin: mouse"></a-entity>
       </a-camera>
       {/* Plane */}
