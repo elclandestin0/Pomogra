@@ -12,20 +12,34 @@ require("aframe-ui-widgets");
 require("aframe-super-keyboard");
 
 const UserControls = () => {
-  async function log() {
+  // message state
+  const [message, setMessage] = useState("");
+
+  // keyboard options with value as our message
+  const keyboardOptions = `hand: #hand;`;
+
+  useEffect(() => {}, [message]);
+
+  // tx to send to our contract
+  const sendMessage = async () => {
     const accounts = await web3.eth.getAccounts();
     console.log(accounts[0]);
     await pomogra.methods.addPaper(message, 1).send({
       from: accounts[0],
     });
-  }
-
-  // message state
-  const [message, setMessage] = useState("");
-  const keyboardOptions = `hand: #mouseCursor, #left, #right; value: ${message}`;
+  };
   return (
     <Entity>
-      {" "}
+      {/* VR Hands */}
+      <Entity
+        id="hand"
+        hand-controls="hand: left; handModelStyle: lowPoly; color: #ffcccc"
+      ></Entity>
+      <Entity
+        id="hand"
+        hand-controls="hand: right; handModelStyle: lowPoly; color: #ffcccc"
+      ></Entity>
+      {/* Keyboard */}
       <Entity
         id="keyboard"
         super-keyboard={keyboardOptions}
@@ -34,10 +48,10 @@ const UserControls = () => {
         events={{
           superkeyboardchange: (e) => {
             setMessage(e.detail.value);
-            console.log(message);
           },
         }}
       ></Entity>
+      {/* Button */}
       <Entity
         id="button"
         ui-button="base: beveled-square, blue; top: square, darkgreen; pressed: yellow, offset"
@@ -45,7 +59,7 @@ const UserControls = () => {
         rotation="30 0 0"
         events={{
           pressed: () => {
-            log();
+            // sendMessage();
           },
         }}
       >
