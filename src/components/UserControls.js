@@ -37,19 +37,6 @@ const UserControls = () => {
     });
   };
 
-  const checkMessageType = (messageTypeSelection) => {
-    if (messageTypeSelection == 0) {
-      colorValue = "blue";
-      messageString = "positive";
-    } else if (messageTypeSelection == 1) {
-      colorValue = "green";
-      messageString = "motivational";
-    } else if (messageTypeSelection == 2) {
-      colorValue = "red";
-      messageString = "gratitude";
-    }
-  };
-
   const messageTypeSwitch = (direction) => {
     if (direction === 0) {
       messageTypeSelection--;
@@ -65,8 +52,23 @@ const UserControls = () => {
     setSection(messageTypeSelection);
     checkMessageType(messageTypeSelection);
   };
+
+  const checkMessageType = (messageTypeSelection) => {
+    if (messageTypeSelection === 0) {
+      colorValue = "blue";
+      messageString = "positive";
+    } else if (messageTypeSelection === 1) {
+      colorValue = "green";
+      messageString = "motivational";
+    } else if (messageTypeSelection === 2) {
+      colorValue = "red";
+      messageString = "gratitude";
+    }
+  };
+
   return (
     <Entity>
+      {/* Arrow Buttons */}
       <Entity
         id="leftButton"
         ui-button={{ top: "arrow, darkgreen", pressed: "yellow, offset" }}

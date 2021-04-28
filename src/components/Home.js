@@ -49,17 +49,17 @@ const Home = (props) => {
       <a-assets>
         <a-mixin
           id="beveled-square"
-          geometry="primitive: cone; radiusTop: 0.15; radiusBottom: 0.19; height: 0.02; segmentsRadial: 4; segmentsHeight: 1"
+          geometry="primitive: cone; radiusTop: 0.15; radiusBottom: 0.19;height: 0.02; segmentsRadial: 4; segmentsHeight: 1"
           rotation="0 45 0"
         ></a-mixin>
         <a-mixin
           id="square"
-          geometry="primitive: box; width: 0.18; height: 0.025; depth: 0.18;"
+          geometry="primitive: box; width: 0.18; height: 0.025; depth: 0.18"
           position="0 0.02 0"
         ></a-mixin>
         <a-mixin
           id="arrow"
-          geometry="primitive: cone; radiusTop: 0.01; radiusBottom: 1.500; height: 2.000;  segmentsRadial: 36; segmentsHeight: 36"
+          geometry="primitive: cone; radiusTop: 0.01; radiusBottom: 1.5; height: 2.0; segmentsRadial: 36; segmentsHeight: 36"
         ></a-mixin>
         <a-mixin id="blue" material="color: #1E2768;"></a-mixin>
         <a-mixin id="darkgreen" material="color: #22FF90;"></a-mixin>
@@ -73,12 +73,12 @@ const Home = (props) => {
       </a-camera>
       {/* Plane */}
       <Entity
-        geometry="primitive: plane; width: 10; height: 10"
+        geometry={{ primitive: "plane", width: 10, height: 10 }}
         position="0 0 -4"
         rotation="-90 0 0"
         material="color: #7BC8A4"
       ></Entity>
-      {/* {returnChain} */}
+      {returnChain}
     </a-scene>
   );
 };
