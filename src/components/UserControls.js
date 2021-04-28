@@ -69,7 +69,7 @@ const UserControls = () => {
     <Entity>
       <Entity
         id="leftButton"
-        ui-button="top: arrow, darkgreen; pressed: yellow, offset"
+        ui-button={{ top: "arrow, darkgreen", pressed: "yellow, offset" }}
         position="-0.5 0.8 -0.6"
         rotation="0 0 90"
         scale=".1 .1 .1"
@@ -101,7 +101,7 @@ const UserControls = () => {
         {/* Keyboard */}
         <Entity
           id="keyboard"
-          super-keyboard="hand: #mouseCursor;"
+          super-keyboard={{ hand: "#mouseCursor" }}
           position="0 1.3 -1"
           rotation="-30 0 0"
           scale="2 2 2"
@@ -141,7 +141,11 @@ const UserControls = () => {
         {/* Buttons */}
         <Entity
           id="buttonStd"
-          ui-button="base: beveled-square, blue; top: square, darkgreen; pressed: yellow, offset"
+          ui-button={{
+            base: "beveled-square, blue",
+            top: "square, darkgreen",
+            pressed: "yellow, offset",
+          }}
           position="0 0.8 -0.6"
           rotation="30 0 0"
           scale="1.5 1.5 1.5"
