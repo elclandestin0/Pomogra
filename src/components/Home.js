@@ -57,6 +57,10 @@ const Home = (props) => {
           geometry="primitive: box; width: 0.18; height: 0.025; depth: 0.18;"
           position="0 0.02 0"
         ></a-mixin>
+        <a-mixin
+          id="arrow"
+          geometry="primitive: cone; radiusTop: 0.01; radiusBottom: 1.500; height: 2.000;  segmentsRadial: 36; segmentsHeight: 36"
+        ></a-mixin>
         <a-mixin id="blue" material="color: #1E2768;"></a-mixin>
         <a-mixin id="darkgreen" material="color: #22FF90;"></a-mixin>
         <a-mixin id="yellow" material="color: #FFF88E;"></a-mixin>
@@ -64,9 +68,6 @@ const Home = (props) => {
       </a-assets>
       <UserControls></UserControls>
       {/* Camera */}
-      <a-camera mouse-cursor>
-        <a-cursor></a-cursor>
-      </a-camera>
       {/* <a-camera mouse-cursor>
         <a-cursor
           animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.2 0.2 0.2; to: 1 1 1"

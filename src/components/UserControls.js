@@ -12,9 +12,11 @@ require("aframe-ui-widgets");
 require("aframe-super-keyboard");
 
 const UserControls = () => {
+  // menu for user to switch between arrows
+  const menuSections = [0, 1, 2];
+  let currentMenuSection = 0;
   // message state
   const [message, setMessage] = useState("");
-
   // tx to send to our contract
   const sendMessage = async () => {
     const accounts = await web3.eth.getAccounts();
@@ -22,6 +24,30 @@ const UserControls = () => {
     await pomogra.methods.addPaper(message, 1).send({
       from: accounts[0],
     });
+  };
+
+  const menuSwitch = (direction) => {
+    if (direction == 0) {
+      console.log(
+        "current menu selection before iteration:" + currentMenuSection
+      );
+      currentMenuSection--;
+      console.log(
+        "current menu selection after iteration: " + currentMenuSection
+      );
+      if (currentMenuSection < 0) {
+        currentMenuSection = menuSections.length - 1;
+        console.log(
+          "adjusted value after checking gate: " + currentMenuSection
+        );
+      }
+    } else if (direction == 1) {
+      currentMenuSection++;
+      if (currentMenuSection > menuSections.length - 1) {
+        currentMenuSection = 0;
+      }
+    }
+    console.log(currentMenuSection);
   };
   return (
     <Entity>
@@ -41,6 +67,30 @@ const UserControls = () => {
         <a-cursor></a-cursor>
       </a-camera>
       {/* Button */}
+      <Entity
+        id="leftButton"
+        ui-button="top: arrow, darkgreen; pressed: yellow, offset"
+        position="-0.5 0.8 -0.6"
+        rotation="0 0 90"
+        scale=".1 .1 .1"
+        events={{
+          pressed: () => {
+            menuSwitch(0);
+          },
+        }}
+      ></Entity>{" "}
+      <Entity
+        id="rightButton"
+        ui-button="top: arrow, darkgreen; pressed: yellow, offset"
+        position="0.5 0.8 -0.6"
+        rotation="0 0 -90"
+        scale="0.1 0.1 0.1"
+        events={{
+          pressed: () => {
+            menuSwitch(1);
+          },
+        }}
+      ></Entity>
       <Entity
         id="buttonStd"
         ui-button="base: beveled-square, blue; top: square, darkgreen; pressed: yellow, offset"
