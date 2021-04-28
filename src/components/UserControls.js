@@ -1,5 +1,5 @@
 // react imports
-import React from "react";
+import React, { useState } from "react";
 
 // ETH imports
 import web3 from "../ethereum/web3";
@@ -13,10 +13,7 @@ require("aframe-super-keyboard");
 
 const UserControls = () => {
   // message state
-  let message = "";
-  const setMessage = (_message) => {
-    message = _message;
-  };
+  const [message, setMessage] = useState("");
 
   // tx to send to our contract
   const sendMessage = async () => {
@@ -28,49 +25,38 @@ const UserControls = () => {
   };
   return (
     <Entity>
-      {/* VR Hands */}
-      {/* <Entity
-        id="leftHand"
-        hand-controls="hand: left; handModelStyle: lowPoly; color: #ffcccc"
-      ></Entity>
-      <Entity
-        id="rightHand"
-        hand-controls="hand: right; handModelStyle: lowPoly; color: #ffcccc"
-      ></Entity> */}
-      <a-entity id="hand" laser-controls="hand: right;">
-        {/* <a-sphere radius="0.03"></a-sphere> */}
-      </a-entity>
-      <a-entity id="hand" laser-controls="hand: left;">
-        {/* <a-sphere radius="0.03"></a-sphere> */}
-      </a-entity>
-      {/* Keyboard */}
-      <Entity
+      <a-entity
         id="keyboard"
-        super-keyboard="hand: #hand"
-        position="0 1.3 -1.2"
+        super-keyboard="hand: #mouseCursor;"
+        position="0 1.3 -1"
         rotation="-30 0 0"
-        // events={{
-        //   superkeyboardchange: (e) => {
-        //     setMessage(e.detail.value);
-        //   },
-        // }}
-      ></Entity>
+        scale="2 2 2"
+        events={{
+          superkeyboardchange: (e) => {
+            setMessage(e.detail.value);
+          },
+        }}
+      ></a-entity>
+      <a-camera mouse-cursor>
+        <a-cursor></a-cursor>
+      </a-camera>
       {/* Button */}
       <Entity
-        id="button"
+        id="buttonStd"
         ui-button="base: beveled-square, blue; top: square, darkgreen; pressed: yellow, offset"
-        position="0 1 -1"
+        position="0 0.8 -0.6"
         rotation="30 0 0"
+        scale="1.5 1.5 1.5"
         events={{
           pressed: () => {
-            // sendMessage();
+            sendMessage();
           },
         }}
       >
         <Entity
           text={{ value: "SEND" }}
           rotation="-90 0 0"
-          position="0.475 0.04 0"
+          position="0.445 0.04 0"
         ></Entity>
       </Entity>
     </Entity>

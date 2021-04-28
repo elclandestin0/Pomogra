@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 
 // aframe imports
 import "aframe";
+import "aframe-mouse-cursor-component";
 import { Entity } from "aframe-react";
 
 // eth imports
@@ -43,8 +44,8 @@ const Home = (props) => {
     );
   });
   return (
-    <a-scene>
-      {" "}
+    <a-scene cursor="rayOrigin: mouse">
+      <a-sky color="#333333"></a-sky>{" "}
       <a-assets>
         <a-mixin
           id="beveled-square"
@@ -63,22 +64,25 @@ const Home = (props) => {
       </a-assets>
       <UserControls></UserControls>
       {/* Camera */}
-      <a-camera>
+      <a-camera mouse-cursor>
+        <a-cursor></a-cursor>
+      </a-camera>
+      {/* <a-camera mouse-cursor>
         <a-cursor
           animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.2 0.2 0.2; to: 1 1 1"
           cursor="fuse: true; fuseTimeout: 1"
           material="color: #ffffff"
         ></a-cursor>
-        <a-entity id="mouseCursor" cursor="rayOrigin: mouse"></a-entity>
-      </a-camera>
+        <Entity id="mouseCursor" cursor="rayOrigin: mouse"></Entity>
+      </a-camera> */}
       {/* Plane */}
-      <a-entity
+      <Entity
         geometry="primitive: plane; width: 10; height: 10"
         position="0 0 -4"
         rotation="-90 0 0"
         material="color: #7BC8A4"
-      ></a-entity>
-      {returnChain}
+      ></Entity>
+      {/* {returnChain} */}
     </a-scene>
   );
 };
