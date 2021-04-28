@@ -68,14 +68,9 @@ const Home = (props) => {
       </a-assets>
       <UserControls></UserControls>
       {/* Camera */}
-      {/* <a-camera mouse-cursor>
-        <a-cursor
-          animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.2 0.2 0.2; to: 1 1 1"
-          cursor="fuse: true; fuseTimeout: 1"
-          material="color: #ffffff"
-        ></a-cursor>
+      <a-camera mouse-cursor>
         <Entity id="mouseCursor" cursor="rayOrigin: mouse"></Entity>
-      </a-camera> */}
+      </a-camera>
       {/* Plane */}
       <Entity
         geometry="primitive: plane; width: 10; height: 10"
