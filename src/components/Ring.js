@@ -10,7 +10,6 @@ let colorValue = "";
 
 const Ring = ({ message, owner, paperType, index }) => {
   if (paperType == 0) {
-    console.log(paperType);
     colorValue = "blue";
   } else if (paperType == 1) {
     colorValue = "green";

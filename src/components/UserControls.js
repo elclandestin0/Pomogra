@@ -22,12 +22,29 @@ const UserControls = () => {
 
   // section state
   const [section, setSection] = useState(0);
+  
+  // message type selection to change between color values and message string
+  if (messageTypeSelection == 0) {
+    console.log("checkMessageType: " + messageTypeSelection);
+    colorValue = "blue";
+    messageString = "positive";
+  } else if (messageTypeSelection == 1) {
+    console.log("checkMessageType: " + messageTypeSelection);
+    colorValue = "green";
+    messageString = "motivational";
+  } else if (messageTypeSelection == 2) {
+    console.log("checkMessageType: " + messageTypeSelection);
+    colorValue = "red";
+    messageString = "gratitude";
+  }
+
   // message state
   const [message, setMessage] = useState("");
 
   useEffect(() => {
     console.log("section state: " + section);
   }, [section]);
+
   // tx to send to our contract
   const sendMessage = async () => {
     const accounts = await web3.eth.getAccounts();
@@ -37,6 +54,7 @@ const UserControls = () => {
     });
   };
 
+  // arrows cycle between all messageTypes
   const messageTypeSwitch = (direction) => {
     if (direction === 0) {
       messageTypeSelection--;
@@ -50,20 +68,6 @@ const UserControls = () => {
       }
     }
     setSection(messageTypeSelection);
-    checkMessageType(messageTypeSelection);
-  };
-
-  const checkMessageType = (messageTypeSelection) => {
-    if (messageTypeSelection === 0) {
-      colorValue = "blue";
-      messageString = "positive";
-    } else if (messageTypeSelection === 1) {
-      colorValue = "green";
-      messageString = "motivational";
-    } else if (messageTypeSelection === 2) {
-      colorValue = "red";
-      messageString = "gratitude";
-    }
   };
 
   return (
