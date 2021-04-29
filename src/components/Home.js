@@ -27,25 +27,67 @@ const Home = (props) => {
     getContract();
   }, []);
 
-  const returnChain = chain.map((paper, index) => {
-    // attributes from our smart contract
-    const message = paper.message;
-    const owner = paper.owner;
-    const paperType = paper.paperType;
+  const positiveRings = chain
+    .filter((paper) => paper.paperType === "0")
+    .map((paper, index) => {
+      // attributes from our smart contract
+      const message = paper.message;
+      const owner = paper.owner;
+      const paperType = paper.paperType;
 
-    return (
-      <Ring
-        message={message}
-        paperType={paperType}
-        owner={owner}
-        index={index}
-        key={index}
-      ></Ring>
-    );
-  });
+      return (
+        <Ring
+          message={message}
+          paperType={paperType}
+          owner={owner}
+          index={index}
+          key={index}
+        ></Ring>
+      );
+    });
+  const motivationRings = chain
+    .filter((paper) => paper.paperType === "1")
+    .map((paper, index) => {
+      // attributes from our smart contract
+      const message = paper.message;
+      const owner = paper.owner;
+      const paperType = paper.paperType;
+
+      return (
+        <Ring
+          message={message}
+          paperType={paperType}
+          owner={owner}
+          index={index}
+          key={index}
+        ></Ring>
+      );
+    });
+  const gratitudeRings = chain
+    .filter((paper) => paper.paperType === "2")
+    .map((paper, index) => {
+      // attributes from our smart contract
+      const message = paper.message;
+      const owner = paper.owner;
+      const paperType = paper.paperType;
+
+      return (
+        <Ring
+          message={message}
+          paperType={paperType}
+          owner={owner}
+          index={index}
+          key={index}
+        ></Ring>
+      );
+    });
+
   return (
-    <a-scene cursor="rayOrigin: mouse">
-      <a-sky color="#333333"></a-sky>{" "}
+    <a-scene
+      cursor="rayOrigin: mouse"
+      inspector="https://cdn.jsdelivr.net/gh/aframevr/aframe-inspector@master/dist/aframe-inspector.min.js"
+    >
+      <a-sky color="#333333"></a-sky>
       <a-assets>
         <a-mixin
           id="beveled-square"
@@ -76,9 +118,41 @@ const Home = (props) => {
         geometry={{ primitive: "plane", width: 10, height: 10 }}
         position="0 0 -4"
         rotation="-90 0 0"
+        material="color: black"
+      ></Entity>
+      <Entity
+        geometry={{ primitive: "plane", width: 10, height: 5 }}
+        position="0 2.5 -9"
+        rotation="0 0 0"
         material="color: #7BC8A4"
       ></Entity>
-      {returnChain}
+      <Entity
+        geometry={{ primitive: "plane", width: 10, height: 5 }}
+        position="5 2.5 -4"
+        rotation="0 -90 0"
+        material="color: #7BC8A4"
+      ></Entity>
+      <Entity
+        geometry={{ primitive: "plane", width: 10, height: 5 }}
+        position="-5 2.5 -4"
+        rotation="0 90 0"
+        material="color: #7BC8A4"
+      ></Entity>
+      <Entity
+        geometry={{ primitive: "plane", width: 10, height: 5 }}
+        position="0 2.5 1"
+        rotation="0 -180 0"
+        material="color: #7BC8A4"
+      ></Entity>
+      <Entity
+        geometry={{ primitive: "plane", width: 10, height: 10 }}
+        position="0 5 -4"
+        rotation="90 0 0"
+        material="color: #7BC8A4"
+      ></Entity>
+      <Entity position="-4.5 1 -3" rotation="0 90 0">{positiveRings}</Entity>
+      <Entity position="4.5 1 -3" rotation="0 -90 0">{motivationRings}</Entity>
+      <Entity position="0 1 0.8" rotation="0 180 0">{gratitudeRings}</Entity>
     </a-scene>
   );
 };

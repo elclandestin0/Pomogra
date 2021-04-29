@@ -22,7 +22,7 @@ const UserControls = () => {
 
   // section state
   const [section, setSection] = useState(0);
-  
+
   // message type selection to change between color values and message string
   if (messageTypeSelection == 0) {
     console.log("checkMessageType: " + messageTypeSelection);
@@ -71,38 +71,13 @@ const UserControls = () => {
   };
 
   return (
-    <Entity>
-      {/* Arrow Buttons */}
-      <Entity
-        id="leftButton"
-        ui-button={{ top: "arrow, darkgreen", pressed: "yellow, offset" }}
-        position="-0.5 0.8 -0.6"
-        rotation="0 0 90"
-        scale=".1 .1 .1"
-        events={{
-          pressed: () => {
-            messageTypeSwitch(0);
-          },
-        }}
-      ></Entity>
-      <Entity
-        id="rightButton"
-        ui-button="top: arrow, darkgreen; pressed: yellow, offset"
-        position="0.5 0.8 -0.6"
-        rotation="0 0 -90"
-        scale="0.1 0.1 0.1"
-        events={{
-          pressed: () => {
-            messageTypeSwitch(1);
-          },
-        }}
-      ></Entity>
+    <Entity position="0 0 -7.5">
       <Entity>
         {/* Title */}
         <Entity
-          position="0 2.5 -1.2"
+          position="0 3.8 -1.2"
           text={{ value: "Create a POMOGRA ring!", align: "center" }}
-          scale="4 4 4"
+          scale="8 8 8"
         />
         {/* Keyboard */}
         <Entity
@@ -110,7 +85,7 @@ const UserControls = () => {
           super-keyboard={{ hand: "#mouseCursor" }}
           position="0 1.3 -1"
           rotation="-30 0 0"
-          scale="2 2 2"
+          scale="4 4 4"
           events={{
             superkeyboardchange: (e) => {
               setMessage(e.detail.value);
@@ -119,7 +94,8 @@ const UserControls = () => {
         ></Entity>
         {/* Pomogra Ring */}
         <Entity
-          position="0 2 -1.2"
+          scale="2.5 2.5 2.5"
+          position="0 2.9 -1.2"
           geometry={{
             primitive: "torus",
             radius: 0.125,
@@ -140,10 +116,35 @@ const UserControls = () => {
         ></Entity>
         {/* Message Type Label */}
         <Entity
-          position="0 1.75 -1.2"
+          position="0 2.2 -1.2"
           text={{ value: messageString, align: "center", color: colorValue }}
-          scale="2 2 2"
+          scale="4 4 4"
         />
+        {/* Arrow Buttons */}
+        <Entity
+          id="leftButton"
+          ui-button={{ top: "arrow, darkgreen", pressed: "yellow, offset" }}
+          position="-0.8 0.4 -0.2"
+          rotation="0 0 90"
+          scale=".175 .175 .175"
+          events={{
+            pressed: () => {
+              messageTypeSwitch(0);
+            },
+          }}
+        ></Entity>
+        <Entity
+          id="rightButton"
+          ui-button="top: arrow, darkgreen; pressed: yellow, offset"
+          position="0.8 0.4 -0.2"
+          rotation="0 0 -90"
+          scale="0.175 0.175 0.175"
+          events={{
+            pressed: () => {
+              messageTypeSwitch(1);
+            },
+          }}
+        ></Entity>
         {/* Buttons */}
         <Entity
           id="buttonStd"
@@ -152,9 +153,9 @@ const UserControls = () => {
             top: "square, darkgreen",
             pressed: "yellow, offset",
           }}
-          position="0 0.8 -0.6"
+          position="0 0.4 -0.2"
           rotation="30 0 0"
-          scale="1.5 1.5 1.5"
+          scale="3 3 3"
           events={{
             pressed: () => {
               sendMessage();
