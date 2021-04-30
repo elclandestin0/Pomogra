@@ -12,9 +12,12 @@ import pomogra from "../ethereum/pomogra";
 // pomogra aframe components
 import Ring from "./Ring";
 import UserControls from "./UserControls";
+import RingTerminal from "./RingTerminal";
 
 require("./aframe/aframe-components");
-
+let positiveMessages = [];
+let motivationMessages = [];
+let gratitudeMessages = [];
 const Home = (props) => {
   // chain state
   const [chain, setChain] = useState([]);
@@ -23,64 +26,81 @@ const Home = (props) => {
     const getContract = async () => {
       const chain = await pomogra.methods.chain().call();
       setChain(chain);
+      positiveMessages = chain
+        .filter((paper) => paper.paperType === "0")
+        .map((paper) => {
+          return paper;
+        });
+      motivationMessages = chain
+        .filter((paper) => paper.paperType === "1")
+        .map((paper) => {
+          return paper;
+        });
+      gratitudeMessages = chain
+        .filter((paper) => paper.paperType === "2")
+        .map((paper) => {
+          return paper;
+        });
     };
     getContract();
   }, []);
 
-  const positiveRings = chain
-    .filter((paper) => paper.paperType === "0")
-    .map((paper, index) => {
-      // attributes from our smart contract
-      const message = paper.message;
-      const owner = paper.owner;
-      const paperType = paper.paperType;
+  // may start delete
+  // const positiveRings = chain
+  //   .filter((paper) => paper.paperType === "0")
+  //   .map((paper, index) => {
+  //     // attributes from our smart contract
+  //     const message = paper.message;
+  //     const owner = paper.owner;
+  //     const paperType = paper.paperType;
 
-      return (
-        <Ring
-          message={message}
-          paperType={paperType}
-          owner={owner}
-          index={index}
-          key={index}
-        ></Ring>
-      );
-    });
-  const motivationRings = chain
-    .filter((paper) => paper.paperType === "1")
-    .map((paper, index) => {
-      // attributes from our smart contract
-      const message = paper.message;
-      const owner = paper.owner;
-      const paperType = paper.paperType;
+  //     return (
+  //       <Ring
+  //         message={message}
+  //         paperType={paperType}
+  //         owner={owner}
+  //         index={index}
+  //         key={index}
+  //       ></Ring>
+  //     );
+  //   });
+  // const motivationRings = chain
+  //   .filter((paper) => paper.paperType === "1")
+  //   .map((paper, index) => {
+  //     // attributes from our smart contract
+  //     const message = paper.message;
+  //     const owner = paper.owner;
+  //     const paperType = paper.paperType;
 
-      return (
-        <Ring
-          message={message}
-          paperType={paperType}
-          owner={owner}
-          index={index}
-          key={index}
-        ></Ring>
-      );
-    });
-  const gratitudeRings = chain
-    .filter((paper) => paper.paperType === "2")
-    .map((paper, index) => {
-      // attributes from our smart contract
-      const message = paper.message;
-      const owner = paper.owner;
-      const paperType = paper.paperType;
+  //     return (
+  //       <Ring
+  //         message={message}
+  //         paperType={paperType}
+  //         owner={owner}
+  //         index={index}
+  //         key={index}
+  //       ></Ring>
+  //     );
+  //   });
+  // const gratitudeRings = chain
+  //   .filter((paper) => paper.paperType === "2")
+  //   .map((paper, index) => {
+  //     // attributes from our smart contract
+  //     const message = paper.message;
+  //     const owner = paper.owner;
+  //     const paperType = paper.paperType;
 
-      return (
-        <Ring
-          message={message}
-          paperType={paperType}
-          owner={owner}
-          index={index}
-          key={index}
-        ></Ring>
-      );
-    });
+  //     return (
+  //       <Ring
+  //         message={message}
+  //         paperType={paperType}
+  //         owner={owner}
+  //         index={index}
+  //         key={index}
+  //       ></Ring>
+  //     );
+  //   });
+  // may end delete
 
   return (
     <a-scene
@@ -113,7 +133,7 @@ const Home = (props) => {
       <a-camera mouse-cursor>
         <Entity id="mouseCursor" cursor="rayOrigin: mouse"></Entity>
       </a-camera>
-      {/* Plane */}
+      {/* Walls, floor and ceiling */}
       <Entity
         geometry={{ primitive: "plane", width: 10, height: 10 }}
         position="0 0 -4"
@@ -150,9 +170,25 @@ const Home = (props) => {
         rotation="90 0 0"
         material="color: #7BC8A4"
       ></Entity>
-      <Entity position="-4.5 1 -3" rotation="0 90 0">{positiveRings}</Entity>
-      <Entity position="4.5 1 -3" rotation="0 -90 0">{motivationRings}</Entity>
-      <Entity position="0 1 0.8" rotation="0 180 0">{gratitudeRings}</Entity>
+      {/* Ring terminals */}
+      <Entity position="4.5 0 -4" rotation="0 90 0">
+        <RingTerminal
+          messages={positiveMessages}
+          messageType={0}
+        ></RingTerminal>
+      </Entity>
+      <Entity position="0 0 0.3">
+        <RingTerminal
+          messages={motivationMessages}
+          messageType={1}
+        ></RingTerminal>
+      </Entity>{" "}
+      <Entity position="-4.5 0 -4" rotation="0 -90 0">
+        <RingTerminal
+          messages={gratitudeMessages}
+          messageType={2}
+        ></RingTerminal>
+      </Entity>
     </a-scene>
   );
 };

@@ -2,7 +2,6 @@
 import React from "react";
 import { Route, Switch } from "react-router";
 
-import Form from "./components/Form";
 import Home from "./components/Home";
 require("aframe-ui-widgets");
 

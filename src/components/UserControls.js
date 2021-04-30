@@ -25,15 +25,12 @@ const UserControls = () => {
 
   // message type selection to change between color values and message string
   if (messageTypeSelection == 0) {
-    console.log("checkMessageType: " + messageTypeSelection);
     colorValue = "blue";
     messageString = "positive";
   } else if (messageTypeSelection == 1) {
-    console.log("checkMessageType: " + messageTypeSelection);
     colorValue = "green";
     messageString = "motivational";
   } else if (messageTypeSelection == 2) {
-    console.log("checkMessageType: " + messageTypeSelection);
     colorValue = "red";
     messageString = "gratitude";
   }
