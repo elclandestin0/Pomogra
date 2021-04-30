@@ -15,9 +15,9 @@ import UserControls from "./UserControls";
 import RingTerminal from "./RingTerminal";
 
 require("./aframe/aframe-components");
-let positiveMessages = [];
-let motivationMessages = [];
-let gratitudeMessages = [];
+let positiveMessages = [{ message: "test", paperType: "0", owner: "test" }];
+let motivationMessages = [{ message: "test", paperType: "0", owner: "test" }];
+let gratitudeMessages = [{ message: "test", paperType: "0", owner: "test" }];
 const Home = (props) => {
   // chain state
   const [chain, setChain] = useState([]);
@@ -25,7 +25,6 @@ const Home = (props) => {
   useEffect(() => {
     const getContract = async () => {
       const chain = await pomogra.methods.chain().call();
-      setChain(chain);
       positiveMessages = chain
         .filter((paper) => paper.paperType === "0")
         .map((paper) => {
@@ -41,6 +40,7 @@ const Home = (props) => {
         .map((paper) => {
           return paper;
         });
+      setChain(chain);
     };
     getContract();
   }, []);
@@ -192,5 +192,4 @@ const Home = (props) => {
     </a-scene>
   );
 };
-
 export default Home;
