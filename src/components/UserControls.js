@@ -24,13 +24,13 @@ const UserControls = () => {
   const [section, setSection] = useState(0);
 
   // message type selection to change between color values and message string
-  if (messageTypeSelection == 0) {
+  if (messageTypeSelection === 0) {
     colorValue = "blue";
     messageString = "positive";
-  } else if (messageTypeSelection == 1) {
+  } else if (messageTypeSelection === 1) {
     colorValue = "green";
     messageString = "motivational";
-  } else if (messageTypeSelection == 2) {
+  } else if (messageTypeSelection === 2) {
     colorValue = "red";
     messageString = "gratitude";
   }
@@ -70,6 +70,11 @@ const UserControls = () => {
   return (
     <Entity position="0 0 -7.5">
       <Entity>
+        {" "}
+        <a-entity id="hand" laser-controls="hand: right;">
+        </a-entity>
+        <a-entity id="hand" laser-controls="hand: left;">
+        </a-entity>
         {/* Title */}
         <Entity
           position="0 3.8 -1.2"
@@ -79,7 +84,7 @@ const UserControls = () => {
         {/* Keyboard */}
         <Entity
           id="keyboard"
-          super-keyboard={{ hand: "#mouseCursor" }}
+          super-keyboard={{ hand: "#mouseCursor", value: message }}
           position="0 1.3 -1"
           rotation="-30 0 0"
           scale="4 4 4"

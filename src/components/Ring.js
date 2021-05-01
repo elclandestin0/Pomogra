@@ -1,5 +1,5 @@
 // react imports
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 // aframe imports
 import "aframe";
@@ -20,14 +20,16 @@ const Ring = ({ message, owner, paperType, index }) => {
   const [show, setShow] = useState(false);
 
   // show state setters
-  function showMessage(show) {
-    setShow(show);
-  }
+  // function showMessage(show) {
+  //   setShow(show);
+  // }
   // if the index is even, rotate x by 90 degrees
-  let position = `${index / 2.5}, 1, 0`;
   let rotation;
+  let position;
   index % 2 === 0 ? (rotation = "0 180 0") : (rotation = "-90 180 0");
-
+  index % 2 === 0
+    ? (position = `${index / 2.5}, 1, 0`)
+    : (position = `${index / 2.5}, 1, 0`);
   let positionMessage = `${index / 5}, 1.225, 0`;
   const animationOptions = `startEvents: mouseleave; property: rotation; dur: 1000; from: 0 0 0; to: ${rotation}; dir: normal; easing: linear; loop: false;`;
   return (
@@ -44,10 +46,10 @@ const Ring = ({ message, owner, paperType, index }) => {
         material={{
           color: colorValue,
         }}
-        events={{
-          mouseenter: showMessage.bind(this, true),
-          mouseleave: showMessage.bind(this, false),
-        }}
+        // events={{
+        //   mouseenter: showMessage.bind(this, true),
+        //   mouseleave: showMessage.bind(this, false),
+        // }}
       ></Entity>
       {show && (
         <Entity

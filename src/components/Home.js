@@ -46,67 +46,25 @@ const Home = (props) => {
   }, []);
 
   // may start delete
-  // const positiveRings = chain
-  //   .filter((paper) => paper.paperType === "0")
-  //   .map((paper, index) => {
-  //     // attributes from our smart contract
-  //     const message = paper.message;
-  //     const owner = paper.owner;
-  //     const paperType = paper.paperType;
+  const allRings = chain.map((paper, index) => {
+    // attributes from our smart contract
+    const message = paper.message;
+    const owner = paper.owner;
+    const paperType = paper.paperType;
 
-  //     return (
-  //       <Ring
-  //         message={message}
-  //         paperType={paperType}
-  //         owner={owner}
-  //         index={index}
-  //         key={index}
-  //       ></Ring>
-  //     );
-  //   });
-  // const motivationRings = chain
-  //   .filter((paper) => paper.paperType === "1")
-  //   .map((paper, index) => {
-  //     // attributes from our smart contract
-  //     const message = paper.message;
-  //     const owner = paper.owner;
-  //     const paperType = paper.paperType;
-
-  //     return (
-  //       <Ring
-  //         message={message}
-  //         paperType={paperType}
-  //         owner={owner}
-  //         index={index}
-  //         key={index}
-  //       ></Ring>
-  //     );
-  //   });
-  // const gratitudeRings = chain
-  //   .filter((paper) => paper.paperType === "2")
-  //   .map((paper, index) => {
-  //     // attributes from our smart contract
-  //     const message = paper.message;
-  //     const owner = paper.owner;
-  //     const paperType = paper.paperType;
-
-  //     return (
-  //       <Ring
-  //         message={message}
-  //         paperType={paperType}
-  //         owner={owner}
-  //         index={index}
-  //         key={index}
-  //       ></Ring>
-  //     );
-  //   });
-  // may end delete
+    return (
+      <Ring
+        message={message}
+        paperType={paperType}
+        owner={owner}
+        index={index}
+        key={index}
+      ></Ring>
+    );
+  });
 
   return (
-    <a-scene
-      cursor="rayOrigin: mouse"
-      inspector="https://cdn.jsdelivr.net/gh/aframevr/aframe-inspector@master/dist/aframe-inspector.min.js"
-    >
+    <a-scene>
       <a-sky color="#333333"></a-sky>
       <a-assets>
         <a-mixin
@@ -130,8 +88,18 @@ const Home = (props) => {
       </a-assets>
       <UserControls></UserControls>
       {/* Camera */}
-      <a-camera mouse-cursor>
-        <Entity id="mouseCursor" cursor="rayOrigin: mouse"></Entity>
+      <a-camera>
+        <Entity
+          id="mouseCursor"
+          cursor="rayOrigin: mouse"
+          mouse-cursor
+        ></Entity>{" "}
+        <a-cursor
+          id="mouseCursor"
+          animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.2 0.2 0.2; to: 1 1 1"
+          cursor="fuse: true; fuseTimeout: 1"
+          material="color: #ffffff"
+        ></a-cursor>
       </a-camera>
       {/* Walls, floor and ceiling */}
       <Entity
@@ -170,6 +138,8 @@ const Home = (props) => {
         rotation="90 0 0"
         material="color: #7BC8A4"
       ></Entity>
+      {/* Rings */}
+      <Entity position="-2 3 -4">{allRings}</Entity>
       {/* Ring terminals */}
       <Entity position="4.5 0 -4" rotation="0 90 0">
         <RingTerminal

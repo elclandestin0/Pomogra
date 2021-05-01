@@ -12,7 +12,6 @@ let colorValue = "";
 const RingTerminal = ({ messages, messageType }) => {
   // ring state
   const [ring, setRing] = useState(0);
-  console.log(messages);
   if (messageType == 0) {
     colorValue = "blue";
     messageString = "positive";
@@ -26,7 +25,6 @@ const RingTerminal = ({ messages, messageType }) => {
 
   // use effect updating with ring
   useEffect(() => {
-    console.log(messages[ring]);
   }, [ring]);
   const ringSwitch = (direction) => {
     if (direction === 0) {
