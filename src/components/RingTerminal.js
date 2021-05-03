@@ -16,7 +16,7 @@ const RingTerminal = ({ messages, messageType }) => {
     colorValue = "blue";
     messageString = "positive";
   } else if (messageType == 1) {
-    colorValue = "green";
+    colorValue = "#66ff00";
     messageString = "motivational";
   } else if (messageType == 2) {
     colorValue = "red";
@@ -108,7 +108,7 @@ const RingTerminal = ({ messages, messageType }) => {
         scale="4 4 4"
       ></Entity>
       <Entity
-        position="0 1 0"
+        position="0 0.9 0"
         rotation="0 180 0"
         text={{
           value: messages[ring].owner,

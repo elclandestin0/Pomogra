@@ -106,31 +106,31 @@ const Home = (props) => {
         geometry={{ primitive: "plane", width: 10, height: 10 }}
         position="0 0 -4"
         rotation="-90 0 0"
-        material="color: black"
+        material="color: blue"
       ></Entity>
       <Entity
         geometry={{ primitive: "plane", width: 10, height: 5 }}
         position="0 2.5 -9"
         rotation="0 0 0"
-        material="color: #7BC8A4"
+        material="color: yellow"
       ></Entity>
       <Entity
         geometry={{ primitive: "plane", width: 10, height: 5 }}
         position="5 2.5 -4"
         rotation="0 -90 0"
-        material="color: #7BC8A4"
+        material="color: green"
       ></Entity>
       <Entity
         geometry={{ primitive: "plane", width: 10, height: 5 }}
         position="-5 2.5 -4"
         rotation="0 90 0"
-        material="color: #7BC8A4"
+        material="color: purple"
       ></Entity>
       <Entity
         geometry={{ primitive: "plane", width: 10, height: 5 }}
         position="0 2.5 1"
         rotation="0 -180 0"
-        material="color: #7BC8A4"
+        material="color: red"
       ></Entity>
       <Entity
         geometry={{ primitive: "plane", width: 10, height: 10 }}
@@ -141,24 +141,30 @@ const Home = (props) => {
       {/* Rings */}
       <Entity position="-2 3 -4">{allRings}</Entity>
       {/* Ring terminals */}
-      <Entity position="4.5 0 -4" rotation="0 90 0">
-        <RingTerminal
-          messages={positiveMessages}
-          messageType={0}
-        ></RingTerminal>
-      </Entity>
-      <Entity position="0 0 0.3">
-        <RingTerminal
-          messages={motivationMessages}
-          messageType={1}
-        ></RingTerminal>
-      </Entity>{" "}
-      <Entity position="-4.5 0 -4" rotation="0 -90 0">
-        <RingTerminal
-          messages={gratitudeMessages}
-          messageType={2}
-        ></RingTerminal>
-      </Entity>
+      {positiveMessages.length > 0 && (
+        <Entity position="4.5 0 -4" rotation="0 90 0">
+          <RingTerminal
+            messages={positiveMessages}
+            messageType={0}
+          ></RingTerminal>
+        </Entity>
+      )}
+      {motivationMessages.length > 0 && (
+        <Entity position="0 0 0.3">
+          <RingTerminal
+            messages={motivationMessages}
+            messageType={1}
+          ></RingTerminal>
+        </Entity>
+      )}
+      {gratitudeMessages.length > 0 && (
+        <Entity position="-4.5 0 -4" rotation="0 -90 0">
+          <RingTerminal
+            messages={gratitudeMessages}
+            messageType={2}
+          ></RingTerminal>
+        </Entity>
+      )}
     </a-scene>
   );
 };
