@@ -24,6 +24,7 @@ const Home = (props) => {
 
   useEffect(() => {
     const getContract = async () => {
+      // 
       const chain = await pomogra.methods.chain().call();
       positiveMessages = chain
         .filter((paper) => paper.paperType === "0")

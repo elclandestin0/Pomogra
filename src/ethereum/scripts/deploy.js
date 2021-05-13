@@ -21,10 +21,11 @@ const compiledPomogra = fs.readFileSync(pomograPath, "utf8");
 
 // set up a truffle provider with our mnemonic phrase and
 // rinkeby infura node
-const truffleProvider = new HDWalletProvider(
-  process.env.seed,
-  "https://rinkeby.infura.io/v3/877a59f4a10342a5aff775080ec9fc06"
-);
+const truffleProvider = new HDWalletProvider({
+  mnemonic: process.env.seed,
+  providerOrUrl: process.env.api,
+  chainId: 4,
+});
 
 // then inject it into web3
 const web3 = new Web3(truffleProvider);

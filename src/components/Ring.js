@@ -59,6 +59,7 @@ const Ring = ({ message, owner, paperType, index }) => {
         />
       )}
     </Entity>
+    
   );
 };
 

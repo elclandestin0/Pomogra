@@ -7,7 +7,7 @@
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
-    "@truffle/hdwallet-provider": "^1.2.6",
+    "@truffle/hdwallet-provider": "^1.4.0",
     "aframe": "^1.2.0",
     "aframe-gui": "^0.5.1",
     "aframe-react": "^4.4.0",
