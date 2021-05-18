@@ -4,7 +4,11 @@ pragma solidity ^0.8.0;
 /**
     @title Pomogra
     @author Memo Khoury
-    @dev TODO: add description later
+    @dev TODO: This is a basic contract that does the following functions:
+    adds a paper message to the chain of messages and returns the state 
+    variables. Anytime a paper (message)  is added, _ownerExists checks if 
+    the owner exists in the mapping. If yes, then do nothing. If no, then add
+    to ownerExists mapping while pushing the new address to the owners array.  
  */
 
 contract Pomogra {
