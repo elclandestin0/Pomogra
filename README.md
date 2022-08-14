@@ -1,6 +1,6 @@
 # pomogra
 
-A chain of rings rendered in Unity with the help of Solidity containing messages of motivation, positivity and gratitude from users all over!
+A chain of rings rendered in AFRAME with the help of Solidity containing messages of motivation, positivity and gratitude from users all over!
 
 Hello and welcome to Pomogra! Pomogra is a React WebApp that runs on your desktop and is powered by AFrame and Solidity to create a room of awesome messages.
 ![Intro](./readme_resources/pomogra_1.gif)
